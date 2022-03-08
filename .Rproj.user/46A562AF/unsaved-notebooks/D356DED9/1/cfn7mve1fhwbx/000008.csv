@@ -1,4 +1,0 @@
-"0","DataManagment <- select(HumanImpact, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,AQ_function, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)"
-"0",""
-"0","DataManagmentRisk <- select(HumanImpact, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,AQ_function,AQ_functionRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)"
-"0",""
