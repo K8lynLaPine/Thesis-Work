@@ -31,12 +31,33 @@ library(magrittr)
 
 NCScore <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanConditionScore<=5)
 
+HumanImpact <- JeriOriginalDataBase %>% filter(FHI_humanImpactRiskScore>=2&FHI_humanImpactRiskScore<=4)
+
 #view(NCScore)
 
-#dim(NCScore)
+dim(NCScore)
+
+#View(HumanImpact)
+dim(HumanImpact)
+
+
 ```
 
 ```{r}
-NCScore <- 
+DataManagment <- select(HumanImpact, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,AQ_function, AQ_persistence)
+
+DataManagmentRisk <- select(HumanImpact, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,AQ_function,AQ_functionRisk,AQ_persistence,AQ_persistenceRisk)
+
 ```
+
+```{r}
+DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,AQ_function, AQ_persistence,meanConditionScore, meanConditionRiskScore)
+```
+
+
+```{r}
+View(DataNoManagment)
+dim(DataNoManagment)
+```
+
 
