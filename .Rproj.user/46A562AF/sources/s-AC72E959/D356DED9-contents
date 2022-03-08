@@ -62,6 +62,8 @@ dim(DataNoManagment)
 ```{r}
 BiodiversityHabitat <- DataManagment %>% filter(HAB_quality<=3)
 
+view(BiodiversityHabitat)
+
 Ranching <- DataManagment %>% filter(FHI_herbivory>=3)
 
 Recreation <- DataManagment %>% filter(FHI_recreation<=3)
@@ -74,4 +76,7 @@ Flow <- DataManagment %>% filter(AQ_persistence>=3)
                          
 ```
 
+```{r}
+
+```
 
