@@ -11,4 +11,11 @@
 [36mi[39m Use [38;5;235m[48;5;253m[38;5;235m[48;5;253m`spec()`[48;5;253m[38;5;235m[49m[39m to retrieve the full column specification for this data.
 [36mi[39m Specify the column types or set [38;5;235m[48;5;253m[38;5;235m[48;5;253m`show_col_types = FALSE`[48;5;253m[38;5;235m[49m[39m to quiet this message.
 "
-"0","View(JeriOriginalDataBase)"
+"0","#View(JeriOriginalDataBase)"
+"0",""
+"0","dim(JeriOriginalDataBase)"
+"1","[1]"
+"1"," 402"
+"1"," 117"
+"1","
+"
