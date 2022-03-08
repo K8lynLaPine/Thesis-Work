@@ -1,11 +1,11 @@
 {
     "id": "D356DED9",
-    "path": null,
-    "project_path": null,
+    "path": "~/RStudioResearch/Thesis-Work/Thesis1.Rmd",
+    "project_path": "Thesis1.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "3600956433",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1646762963072.0,
     "source_on_save": false,
     "relative_order": 1,
@@ -18,11 +18,11 @@
         "last_setup_crc32": "AC72E959bb338d19"
     },
     "folds": "",
-    "lastKnownWriteTime": 7454127348392028532,
-    "encoding": "",
+    "lastKnownWriteTime": 1646776868,
+    "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1646775537972,
+    "last_content_update": 1646776868532,
     "read_only": false,
     "read_only_alternatives": []
 }
