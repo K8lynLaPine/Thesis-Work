@@ -81,6 +81,11 @@ Flow <- DataManagment %>% filter(AQ_persistence>=3) %>% drop_na(AQ_persistence)
 ```
 
 ```{r}
-
+write.csv(Ranching, "Ranching.csv")
+write.csv(BiodiversityHabitat, "BiodiversityHabitat.csv")
+write.csv(Recreation, "Recreation.csv")
+write.csv(Cultural, "cultural.csv")
+write.csv(Municipal, "Municipal.csv")
+write.csv(Flow, "Flow.csv")
 ```
 
