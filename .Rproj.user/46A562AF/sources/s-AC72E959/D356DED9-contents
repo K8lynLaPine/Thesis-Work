@@ -17,7 +17,9 @@ When you click the **Knit** button a document will be generated that includes bo
 ```{r}
 library(readr)
 JeriOriginalDataBase <- read_csv("JeriOriginalDataBase.csv")
-View(JeriOriginalDataBase)
+#View(JeriOriginalDataBase)
+
+dim(JeriOriginalDataBase)
 ```
 ```{r}
 #install.packages("dplyr")
@@ -27,9 +29,14 @@ View(JeriOriginalDataBase)
 library(tidyverse)
 library(magrittr)
 
-NCScore <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanConditionScore<=7)
+NCScore <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanConditionScore<=5)
 
-view(NCScore)
+#view(NCScore)
+
+#dim(NCScore)
 ```
 
+```{r}
+NCScore <- 
+```
 
