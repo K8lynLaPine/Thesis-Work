@@ -1,0 +1,36 @@
+---
+title: "ThesisWork"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+JeriOriginalDataBase <- read_csv("JeriOriginalDataBase.csv")
+View(JeriOriginalDataBase)
+```
+
+```{r}
+install.packages("dplyr")
+library(dplyr)
+
+library(tidyverse)
+library(magrittr)
+
+
+```
+
+
+```{r}
+library(tidyverse)
+library(magrittr)
+
+NCScore <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanConditionScore<=7)
+
+view(NCScore)
+
+```
+
