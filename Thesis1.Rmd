@@ -1,0 +1,91 @@
+---
+title: "Thesis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r}
+library(readr)
+JeriOriginalDataBase <- read_csv("JeriOriginalDataBase.csv")
+#View(JeriOriginalDataBase)
+
+dim(JeriOriginalDataBase)
+```
+```{r}
+#install.packages("dplyr")
+#library(dplyr)
+
+
+library(tidyverse)
+library(magrittr)
+
+NCScore <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanConditionScore<=5)
+
+HumanImpact <- JeriOriginalDataBase %>% filter(FHI_humanImpactRiskScore>=2&FHI_humanImpactRiskScore<=4)
+
+#view(NCScore)
+
+dim(NCScore)
+
+#View(HumanImpact)
+dim(HumanImpact)
+
+
+```
+
+```{r}
+DataManagment <- select(HumanImpact, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,AQ_function, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)
+
+DataManagmentRisk <- select(HumanImpact, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,AQ_function,AQ_functionRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)
+
+```
+
+```{r}
+DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,AQ_function, AQ_persistence,meanConditionScore, meanConditionRiskScore,FHI_humanImpactRiskScore)
+```
+
+
+```{r}
+View(DataNoManagment)
+dim(DataNoManagment)
+```
+```{r}
+BiodiversityHabitat <- DataManagment %>% filter(HAB_quality<=3) %>% drop_na(HAB_quality)
+
+Ranching <- DataManagment %>% filter(FHI_herbivory>=3) %>% drop_na(FHI_herbivory)
+
+
+Recreation <- DataManagment %>% filter(FHI_recreation<=3) %>% drop_na(FHI_recreation)
+
+
+Cultural <- DataManagment %>% filter(AC_culturalSignificance>=2) %>% drop_na(AC_culturalSignificance)
+
+
+Municipal <- DataManagment %>% filter(AQ_function<=3) %>% drop_na(AQ_function)
+
+
+
+Flow <- DataManagment %>% filter(AQ_persistence>=3) %>% drop_na(AQ_persistence)
+
+                         
+```
+
+```{r}
+write.csv(Ranching, "Ranching.csv")
+write.csv(BiodiversityHabitat, "BiodiversityHabitat.csv")
+write.csv(Recreation, "Recreation.csv")
+write.csv(Cultural, "cultural.csv")
+write.csv(Municipal, "Municipal.csv")
+write.csv(Flow, "Flow.csv")
+```
+
