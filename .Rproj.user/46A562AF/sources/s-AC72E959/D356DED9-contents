@@ -60,19 +60,23 @@ View(DataNoManagment)
 dim(DataNoManagment)
 ```
 ```{r}
-BiodiversityHabitat <- DataManagment %>% filter(HAB_quality<=3)
+BiodiversityHabitat <- DataManagment %>% filter(HAB_quality<=3) %>% drop_na(HAB_quality)
 
-view(BiodiversityHabitat)
+Ranching <- DataManagment %>% filter(FHI_herbivory>=3) %>% drop_na(FHI_herbivory)
 
-Ranching <- DataManagment %>% filter(FHI_herbivory>=3)
 
-Recreation <- DataManagment %>% filter(FHI_recreation<=3)
+Recreation <- DataManagment %>% filter(FHI_recreation<=3) %>% drop_na(FHI_recreation)
 
-Cultural <- DataManagment %>% filter(AC_culturalSignificance>=2)
 
-Municipal <- DataManagment %>% filter(AQ_function<=3)
+Cultural <- DataManagment %>% filter(AC_culturalSignificance>=2) %>% drop_na(AC_culturalSignificance)
 
-Flow <- DataManagment %>% filter(AQ_persistence>=3)
+
+Municipal <- DataManagment %>% filter(AQ_function<=3) %>% drop_na(AQ_function)
+
+
+
+Flow <- DataManagment %>% filter(AQ_persistence>=3) %>% drop_na(AQ_persistence)
+
                          
 ```
 
