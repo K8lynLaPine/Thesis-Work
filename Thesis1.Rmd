@@ -44,14 +44,14 @@ dim(HumanImpact)
 ```
 
 ```{r}
-DataManagment <- select(HumanImpact, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,AQ_function, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)
+DataManagment <- select(HumanImpact, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)
 
-DataManagmentRisk <- select(HumanImpact, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,AQ_function,AQ_functionRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)
+DataManagmentRisk <- select(HumanImpact, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,FHI_flowRegulation,FHI_flowRegulationRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)
 
 ```
 
 ```{r}
-DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,AQ_function, AQ_persistence,meanConditionScore, meanConditionRiskScore,FHI_humanImpactRiskScore)
+DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,meanConditionScore, meanConditionRiskScore,FHI_humanImpactRiskScore)
 ```
 
 
@@ -60,22 +60,22 @@ View(DataNoManagment)
 dim(DataNoManagment)
 ```
 ```{r}
-BiodiversityHabitat <- DataManagment %>% filter(HAB_quality<=3) %>% drop_na(HAB_quality)
+BiodiversityHabitat <- DataManagment %>% filter(HAB_quality>=4 & HAB_quality<=6) %>% drop_na(HAB_quality)
 
-Ranching <- DataManagment %>% filter(FHI_herbivory>=3) %>% drop_na(FHI_herbivory)
-
-
-Recreation <- DataManagment %>% filter(FHI_recreation<=3) %>% drop_na(FHI_recreation)
+Ranching <- DataManagment %>% filter(FHI_herbivory>=0 & FHI_herbivory<=5) %>% drop_na(FHI_herbivory)
 
 
-Cultural <- DataManagment %>% filter(AC_culturalSignificance>=2) %>% drop_na(AC_culturalSignificance)
+Recreation <- DataManagment %>% filter(FHI_recreation>=4 & FHI_recreation<=6) %>% drop_na(FHI_recreation)
 
 
-Municipal <- DataManagment %>% filter(AQ_function<=3) %>% drop_na(AQ_function)
+Cultural <- DataManagment %>% filter(AC_culturalSignificance>=2 & AC_culturalSignificance<=6) %>% drop_na(AC_culturalSignificance)
+
+
+Municipal <- DataManagment %>% filter(FHI_flowRegulation>=0 & FHI_flowRegulation<=5) %>% drop_na(FHI_flowRegulation)
 
 
 
-Flow <- DataManagment %>% filter(AQ_persistence>=3) %>% drop_na(AQ_persistence)
+Flow <- DataManagment %>% filter(AQ_persistence>=2 & AQ_persistence<=6)
 
                          
 ```
