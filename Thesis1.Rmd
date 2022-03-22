@@ -29,29 +29,28 @@ dim(JeriOriginalDataBase)
 library(tidyverse)
 library(magrittr)
 
-NCScore <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanConditionScore<=5)
+HighPriotity <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanConditionScore<=5 & FHI_humanImpactRiskScore>=2 & FHI_humanImpactRiskScore<=4)
 
-HumanImpact <- JeriOriginalDataBase %>% filter(FHI_humanImpactRiskScore>=2&FHI_humanImpactRiskScore<=4)
+
 
 #view(NCScore)
 
 dim(NCScore)
 
-#View(HumanImpact)
-dim(HumanImpact)
 
 
-```
-
-```{r}
-DataManagment <- select(HumanImpact, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)
-
-DataManagmentRisk <- select(HumanImpact, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,FHI_flowRegulation,FHI_flowRegulationRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)
 
 ```
 
 ```{r}
-DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,meanConditionScore, meanConditionRiskScore,FHI_humanImpactRiskScore)
+DataManagment <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)
+
+DataManagmentRisk <- select(HighPriotity, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,FHI_flowRegulation,FHI_flowRegulationRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)
+
+```
+
+```{r}
+DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,meanConditionScore, meanConditionRiskScore,FHI_humanImpactRiskScore) 
 ```
 
 
@@ -87,5 +86,10 @@ write.csv(Recreation, "Recreation.csv")
 write.csv(Cultural, "cultural.csv")
 write.csv(Municipal, "Municipal.csv")
 write.csv(Flow, "Flow.csv")
+```
+
+
+```{r}
+view(Cultural)
 ```
 
