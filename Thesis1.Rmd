@@ -33,10 +33,6 @@ HighPriotity <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanCondit
 
 
 
-#view(NCScore)
-
-dim(NCScore)
-
 
 
 
@@ -59,37 +55,39 @@ View(DataNoManagment)
 dim(DataNoManagment)
 ```
 ```{r}
-BiodiversityHabitat <- DataManagment %>% filter(HAB_quality>=4 & HAB_quality<=6) %>% drop_na(HAB_quality)
-
-Ranching <- DataManagment %>% filter(FHI_herbivory>=0 & FHI_herbivory<=5) %>% drop_na(FHI_herbivory)
+BiodiversityHabitatHP <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(HAB_quality>=0 & HAB_quality<=6) %>% drop_na(HAB_quality)
 
 
-Recreation <- DataManagment %>% filter(FHI_recreation>=4 & FHI_recreation<=6) %>% drop_na(FHI_recreation)
+RanchingHP <- select(HighPriotity, siteid:seapscore_id,FHI_herbivory,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(FHI_herbivory>=0 & FHI_herbivory<=6)%>% drop_na(FHI_herbivory)
 
 
-Cultural <- DataManagment %>% filter(AC_culturalSignificance>=2 & AC_culturalSignificance<=6) %>% drop_na(AC_culturalSignificance)
+RecreationHP <- select(HighPriotity, siteid:seapscore_id,FHI_recreation,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(FHI_recreation) %>% filter(FHI_recreation>=0 & FHI_recreation<=6)
 
 
-Municipal <- DataManagment %>% filter(FHI_flowRegulation>=0 & FHI_flowRegulation<=5) %>% drop_na(FHI_flowRegulation)
+CulturalHP <- select(HighPriotity, siteid:seapscore_id,AC_culturalSignificance ,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(AC_culturalSignificance) %>% filter(AC_culturalSignificance>=0 & AC_culturalSignificance<=6)
+
+
+MunicipalHP <-select(HighPriotity, siteid:seapscore_id,FHI_flowRegulation,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(FHI_flowRegulation) %>% filter(FHI_flowRegulation>=0 & FHI_flowRegulation<=6)
 
 
 
-Flow <- DataManagment %>% filter(AQ_persistence>=2 & AQ_persistence<=6)
+FlowHP <- select(HighPriotity, siteid:seapscore_id,AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(AQ_persistence) %>% filter(AQ_persistence>=0 & AQ_persistence<=6)
+
 
                          
 ```
 
 ```{r}
-write.csv(Ranching, "Ranching.csv")
-write.csv(BiodiversityHabitat, "BiodiversityHabitat.csv")
-write.csv(Recreation, "Recreation.csv")
-write.csv(Cultural, "cultural.csv")
-write.csv(Municipal, "Municipal.csv")
-write.csv(Flow, "Flow.csv")
+write.csv(RanchingHP, "Ranching.csv")
+write.csv(BiodiversityHabitatHP, "BiodiversityHabitat.csv")
+write.csv(RecreationHP, "Recreation.csv")
+write.csv(CulturalHP, "cultural.csv")
+write.csv(MunicipalHP, "Municipal.csv")
+write.csv(FlowHP, "Flow.csv")
 ```
 
 
 ```{r}
-view(Cultural)
+view(CulturalHP)
 ```
 
