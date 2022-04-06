@@ -39,14 +39,14 @@ HighPriotity <- JeriOriginalDataBase %>% filter(meanConditionScore>=3&meanCondit
 ```
 
 ```{r}
-DataManagment <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)
+DataManagment <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_fencing,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)
 
-DataManagmentRisk <- select(HighPriotity, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,FHI_flowRegulation,FHI_flowRegulationRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)
+DataManagmentRisk <- select(HighPriotity, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_fencing,FHI_fencingRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,FHI_flowRegulation,FHI_flowRegulationRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)
 
 ```
 
 ```{r}
-DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,meanConditionScore, meanConditionRiskScore,FHI_humanImpactRiskScore) 
+DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,FHI_fencing,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,meanConditionScore, meanConditionRiskScore,FHI_humanImpactRiskScore) 
 ```
 
 
@@ -58,7 +58,7 @@ dim(DataNoManagment)
 BiodiversityHabitatHP <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(HAB_quality>=0 & HAB_quality<=6) %>% drop_na(HAB_quality)
 
 
-RanchingHP <- select(HighPriotity, siteid:seapscore_id,FHI_herbivory,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(FHI_herbivory>=0 & FHI_herbivory<=6)%>% drop_na(FHI_herbivory)
+FencingHP <- select(HighPriotity, siteid:seapscore_id,FHI_fencing,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(FHI_fencing>=0 & FHI_fencing<=6)%>% drop_na(FHI_fencing)
 
 
 RecreationHP <- select(HighPriotity, siteid:seapscore_id,FHI_recreation,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(FHI_recreation) %>% filter(FHI_recreation>=0 & FHI_recreation<=6)
@@ -78,7 +78,7 @@ FlowHP <- select(HighPriotity, siteid:seapscore_id,AQ_persistence,FHI_humanImpac
 ```
 
 ```{r}
-write.csv(RanchingHP, "Ranching.csv")
+write.csv(FencingHP, "Fencing.csv")
 write.csv(BiodiversityHabitatHP, "BiodiversityHabitat.csv")
 write.csv(RecreationHP, "Recreation.csv")
 write.csv(CulturalHP, "cultural.csv")
@@ -88,6 +88,6 @@ write.csv(FlowHP, "Flow.csv")
 
 
 ```{r}
-view(CulturalHP)
+view(FencingHP)
 ```
 
