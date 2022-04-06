@@ -44,8 +44,6 @@ Attaching package: ‘magrittr’
 "0",""
 "0",""
 "0",""
-"0","#view(NCScore)"
 "0",""
-"0","dim(NCScore)"
-"2","Error: object 'NCScore' not found
-"
+"0",""
+"0",""
