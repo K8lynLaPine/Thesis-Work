@@ -1,4 +1,4 @@
-"0","DataManagment <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_herbivory,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)"
+"0","DataManagment <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_fencing,FHI_recreation,AC_culturalSignificance,FHI_flowRegulation, AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore)"
 "0",""
-"0","DataManagmentRisk <- select(HighPriotity, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_herbivory,FHI_herbivoryRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,FHI_flowRegulation,FHI_flowRegulationRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)"
+"0","DataManagmentRisk <- select(HighPriotity, siteid:seapscore_id,HAB_quality,HAB_qualityRisk,FHI_fencing,FHI_fencingRisk,FHI_recreation,FHI_recreationRisk,AC_culturalSignificance,AC_culturalSignificanceRisk,FHI_flowRegulation,FHI_flowRegulationRisk,AQ_persistence,AQ_persistenceRisk,FHI_humanImpactRiskScore,meanConditionScore)"
 "0",""
