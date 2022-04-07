@@ -57,37 +57,57 @@ dim(DataNoManagment)
 ```{r}
 BiodiversityHabitatHP <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(HAB_quality>=0 & HAB_quality<=6) %>% drop_na(HAB_quality)
 
+BiodiversityHabitatALL <- select(DataNoManagment, siteid:seapscore_id,HAB_quality,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(HAB_quality>=0 & HAB_quality<=6) %>% drop_na(HAB_quality)
+
+
 
 FencingHP <- select(HighPriotity, siteid:seapscore_id,FHI_fencing,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(FHI_fencing>=0 & FHI_fencing<=6)%>% drop_na(FHI_fencing)
+
+FencingALL <- select(DataNoManagment, siteid:seapscore_id,FHI_fencing,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(FHI_fencing>=0 & FHI_fencing<=6)%>% drop_na(FHI_fencing)
 
 
 RecreationHP <- select(HighPriotity, siteid:seapscore_id,FHI_recreation,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(FHI_recreation) %>% filter(FHI_recreation>=0 & FHI_recreation<=6)
 
+RecreationALL <- select(DataNoManagment, siteid:seapscore_id,FHI_recreation,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(FHI_recreation) %>% filter(FHI_recreation>=0 & FHI_recreation<=6)
+
 
 CulturalHP <- select(HighPriotity, siteid:seapscore_id,AC_culturalSignificance ,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(AC_culturalSignificance) %>% filter(AC_culturalSignificance>=0 & AC_culturalSignificance<=6)
 
+CulturalALL <- select(DataNoManagment, siteid:seapscore_id,AC_culturalSignificance ,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(AC_culturalSignificance) %>% filter(AC_culturalSignificance>=0 & AC_culturalSignificance<=6)
 
 MunicipalHP <-select(HighPriotity, siteid:seapscore_id,FHI_flowRegulation,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(FHI_flowRegulation) %>% filter(FHI_flowRegulation>=0 & FHI_flowRegulation<=6)
 
-
+MunicipalALL <-select(DataNoManagment, siteid:seapscore_id,FHI_flowRegulation,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(FHI_flowRegulation) %>% filter(FHI_flowRegulation>=0 & FHI_flowRegulation<=6)
 
 FlowHP <- select(HighPriotity, siteid:seapscore_id,AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(AQ_persistence) %>% filter(AQ_persistence>=0 & AQ_persistence<=6)
+
+FlowALL <- select(DataNoManagment, siteid:seapscore_id,AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore) %>% drop_na(AQ_persistence) %>% filter(AQ_persistence>=0 & AQ_persistence<=6)
 
 
                          
 ```
 
 ```{r}
-write.csv(FencingHP, "Fencing.csv")
-write.csv(BiodiversityHabitatHP, "BiodiversityHabitat.csv")
-write.csv(RecreationHP, "Recreation.csv")
-write.csv(CulturalHP, "cultural.csv")
-write.csv(MunicipalHP, "Municipal.csv")
-write.csv(FlowHP, "Flow.csv")
+write.csv(FencingHP, "FencingHP.csv")
+write.csv(BiodiversityHabitatHP, "BiodiversityHabitatHP.csv")
+write.csv(RecreationHP, "RecreationHP.csv")
+write.csv(CulturalHP, "culturalHP.csv")
+write.csv(MunicipalHP, "MunicipalHP.csv")
+write.csv(FlowHP, "FlowHP.csv")
+```
+
+```{r}
+write.csv(FencingALL, "FencingALL.csv")
+write.csv(BiodiversityHabitatALL, "BiodiversityHabitatALL.csv")
+write.csv(RecreationALL, "RecreationALL.csv")
+write.csv(CulturalALL, "culturalALL.csv")
+write.csv(MunicipalALL, "MunicipalALL.csv")
+write.csv(FlowALL, "FlowALL.csv")
 ```
 
 
 ```{r}
-view(FencingHP)
+view(BiodiversityHabitatALL)
+
 ```
 
