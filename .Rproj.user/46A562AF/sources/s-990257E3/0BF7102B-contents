@@ -1,0 +1,349 @@
+---
+title: "Week04-inClassNotes"
+output: pdf_document
+---
+
+
+```{r}
+
+#HELP ON LAB 4 
+
+#question 5
+
+epi <- read.csv("epinutr", guess_max = 1e5)
+
+
+#LakeID works as a key to join them all (I did that)
+
+#question 5b 
+
+j1 <- left_join(loc, epi, by = "lagoslakeid") %>%
+       left_join (lak, by= "lagoslakeid") %>%
+        filter(is.finite(tp))
+       ##This will take out all of the NaN values because NA does not catch it 
+
+
+#summ <- j1 %>% 
+ # group_by(lagoslakeid) %>%
+ # summarize( lat = mean(nhd_lat),
+ #            long = mean(nhd_lon),
+        #     max_depth = mean(maxdepth)
+           #  meantp = mean(tp, na.rm = TRUE)
+   
+
+#1f 
+filter <- filter(epi, !is.na(doc) & !is.na(nh4) & !is.na(tp))
+#2a
+#get rid of the columns with NA's 
+#shorthand
+newfilt <- select_if( filter, ~!any(is.na(.x))
+#could have also done this, long hand 
+goodcols<- function (x) {
+  
+good <- !any(is.na(x))
+return(good)
+
+}
+#
+
+#newfilt2 <- select_if(filt,goodcols)
+```
+
+
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Week 04 - Data manipulation
+
+This week we're going to learn several tools for manipulating and working with datasets. These functions are all part of the ``tidyverse'', and examples are well described here:
+
+#WEBSITE: http://r4ds.had.co.nz/transform.html
+
+So, first we will load the tidyverse
+
+
+```{r tidy, include=FALSE}
+library(tidyverse)
+```
+
+Now we're set to get working, we'll start by loading in a dataset. We're going to deviate from Earth and Environmental Sciences for this example to follow along with the R for Data Science. 
+
+
+Let's load in our data. Generally speaking, csv files are the most convenient way to get data sets in and out of R
+```{r}
+flights = read_csv("nycFlights.csv")
+```
+
+First - let's a take a quick look at the basics of this dataset:
+
+For a quick view of the top of the dataset just type it's name
+```{r}
+flights
+```
+
+And it's dimensions:
+
+```{r}
+dim(flights)
+```
+
+OK - that's a lot of information. This is where R and tidyverse really shines. We're going to learn 5 ``verbs'' for interacting with data.frames or tibbles.
+#verbs = funcrions 
+
+##1. Filter
+filter() will select the #rows# of the table that you want based on some screening criteria. We won't usually want to work with all 336776 rows at the same time. 
+
+#FILTER = FOR ROWS 
+
+```{r}
+
+#New data frame called janflights 
+janFlights = filter(flights,month == 1 )
+```
+
+You can use any expression that returns booleans here in filter
+
+```{r}
+#Get all flights that travelled more than 1000 miles between april and october, and arrived before noon
+#New data frame = rows (first entry is data, criteria )
+#dont have to put quotes or $$
+
+
+airlines <- c("UA","AA","DL")
+
+theseFlights = filter(flights,distance > 1000 & month>=4 & month<=10 & arr_time < 1200 & carrier %in% airlines )
+#see if option is in airline that we specified as a vector earlier 
+```
+
+One quick note about "==" 
+"==" is equal to 
+
+#
+
+```{r}
+sqrt(2)^2 == 2
+
+1/49*49 == 1
+```
+
+
+```{r}
+#view(theseFlights)
+```
+
+A note about machine precision:
+```{r}
+.Machine$double.eps
+#double precision.. says it'll be accurate down to the 16the decimal place 
+```
+#the function near() fixed this precision problem 
+so you can use near() instead
+
+```{r}
+
+#x,y,tolerance, three variables 
+#just asking if it is near the number to the precision 
+near(sqrt(2)^2 , 2)
+
+near(1/49*49 , 1)
+
+
+near(2.52,2.53, tol = 0.1)
+```
+
+
+##2 arrange()
+arrange works like filter, except that instead of picking which rows you want, you change the order of the rows based on some criterion. 
+
+```{r}
+
+      #sort by year, month, then day 
+arrange(theseFlights, year, month, day)
+
+```
+If you want the in descending order use desc()
+#most common modifier 
+```{r}
+arrange(theseFlights,desc(dep_delay))
+```
+
+##3. select() is for choosing which columns you want include in the table
+##basically filter but for columns 
+```{r}
+# Select columns by name
+select(flights, year, month, day, dep_delay)
+
+# Select all columns between year and day (inclusive)
+select(flights, year:day)
+#year:day colon is every column in between year and day, those 3 columns 
+
+# Select all columns except those from year to day (inclusive)
+select(flights, -(year:day))
+#knows about the - modifier to remove columns "I want all columns except for" 
+
+```
+
+#A variant of select() is rename(), which lets you rename without losing any variables, and the everything 
+#you can rename with select 
+
+```{r}
+select(flights, newyear = year)
+```
+
+```{r}
+
+#rename just returns everything else 
+rename(flights, yearAD = year)
+```
+
+#There are a number of helper functions that make select() more powerful, you can find them in the help (?select)
+
+#Here we're going to grab all columns between year and day, any column that ends_with "delay", and the distance and air_time columns
+
+```{r}
+
+#New data frame 
+
+flights_sml = select(flights, year:day, ends_with("delay"), distance, air_time)
+```
+
+
+##4. Add new variables with mutate()
+#lets you create new variables, things you want to do to your table 
+ Mutate let's you add new variables derived from others efficiently
+ 
+# First, we'll take the smaller tibble and add two columns:
+gain, which is how much time was gained in the air, 
+and 
+speed, based on the distance and the air_time
+
+```{r}
+mutate(flights_sml,
+       #difference between arrival and depature 
+  gain = arr_delay - dep_delay,
+  #simple equation
+  speed = distance / air_time * 60
+)
+```
+There are a lot of operators that can be used with mutate() to create almost any product you can imagine. 
+
+```{r}
+gainTbl = mutate(flights_sml,
+  gain = arr_delay - dep_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours,
+  gain_rank = min_rank(desc(gain_per_hour))
+)
+
+arrange(gainTbl,gain_rank)
+```
+
+##5. summarize()
+#Takes a bunch of data and sumarizes it into a single value 
+Our last key function for interacting with single tables is summarize(). Summarize summarizes a variable into a single value via a number of methods.
+
+```{r}
+#Ask for the mean of the delay variable, and the number of observations
+
+summarize(flights, 
+          mean = mean(dep_delay, na.rm = TRUE),
+          n = n())
+#input the data, summarize mean, remove na.rm so theres no missing values, n= value
+
+```
+This isn't super useful by itself, but becomes very powerful when analyzed by group
+
+Here we want to summarize some information about each airport:
+
+```{r}
+#group by function puts all flights into a group 
+#grouping makes a note under the hood for summarrizing, summurize by groups 
+
+by_dest <- group_by(flights, dest) #so take our table and group by destination
+delay <- summarise(by_dest,#summarize this table by..
+  count = n(),#how many flights were there #the number of observations in each group
+  dist = mean(distance, na.rm = TRUE), #the mean distance in each group, removing any missing values 
+  delay = mean(arr_delay, na.rm = TRUE)#and the delay in for each group
+)
+#no interested in counts more than 20, not interest in flights in honalulu 
+delay <- filter(delay, count > 20, dest != "HNL") #now filter that to include on observations with at least 20 flights and that are not HNL.
+delay
+```
+
+###A note on "pipes"
+
+The pipe operator %>% allows you to do the same thing in a *possibly* more intuitive way
+
+```{r}
+library(magrittr)
+delays <- flights %>% 
+  group_by(dest) %>% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>% 
+  filter(count > 20, dest != "HNL")
+
+delays
+```
+
+
+##Relational tables
+
+It's exceedingly common to have additional datasets that contain different, but related information. Let's take a look at another one from the planes dataset - a table of weather conditions relevant to the flights:
+
+```{r}
+weather = read_csv("weather.csv")
+```
+
+So the point of joining tables is to connect tables that have some (but usually not all) variables in common. We will connect them by using keys - keys are 1 or more variables that are 1) shared between two datasets and 2) uniquely identify an observation (row)
+
+For weather, we need several variables to do this: year, month, day, hour and origin. First let's make sure that actually is a unique identification system
+
+```{r}
+weather %>% 
+  count(year, month, day, hour, origin) %>% 
+  filter(n > 1)
+```
+OK, those seem like a useful set of keys. 
+
+There are many conceptual ways to join to tables together (diagram as Venns on the board)
+
+In this case, we will do a left_join, since we want to keep all of our flight data, but only the rows from weather that match:
+
+```{r}
+bigFlights = left_join(flights,weather)
+bigFlights
+```
+Joining tables can get a little confusing, but is incredibly useful...
+
+##Putting it all together:
+
+Okay, let's imagine that this is our assignment. We want to understand the relationship between winter weather and airport delays. We have this large dataset, but need to get our data in order...
+
+
+```{r}
+ourData = flights %>% #we'll use the pipe for clarity
+  filter(month < 4 | month > 10) %>% #let's only examine winter months
+  mutate(totalDelay = dep_delay + arr_delay) %>% #we want to examine total delay
+  arrange(desc(totalDelay)) %>% #order the data by total delay
+  left_join(weather)
+ourData
+```
+That was efficient. Now, for making sense of the data! That's for the rest of the semester!
+
+Next week - data visualization - a teaser
+```{r}
+ggplot(ourData) + geom_boxplot(aes(x = precip,y = totalDelay,group = precip))
+```
+
+
+
+
+
