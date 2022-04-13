@@ -1,2 +1,0 @@
-"0",""
-"0","ggplot(JeriOriginalDataBase, aes(x=JeriOriginalDataBase$meanConditionScore)) + geom_histogram(bins = 6, position = position_dodge(0.7))"
