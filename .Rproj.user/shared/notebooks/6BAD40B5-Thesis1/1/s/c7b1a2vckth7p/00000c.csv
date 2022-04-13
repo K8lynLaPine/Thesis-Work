@@ -1,0 +1,15 @@
+"0","FencingHP <- select(HighPriotity, siteid:seapscore_id,FHI_fencing,FHI_humanImpactRiskScore,meanConditionScore) %>% filter(FHI_fencing>=0 & FHI_fencing<=6)%>% drop_na(FHI_fencing)"
+"0",""
+"0","ggplot(FencingHP, aes(x=FencingHP$meanConditionScore)) + geom_histogram() + "
+"0","    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom=""text"", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)"
+"2","Warning:"
+"2"," Use of `FencingHP$meanConditionScore` is discouraged. Use `meanConditionScore` instead.
+"
+"2","Warning:"
+"2"," Use of `FencingHP$meanConditionScore` is discouraged. Use `meanConditionScore` instead.
+"
+"2","Warning:"
+"2"," Use of `FencingHP$meanConditionScore` is discouraged. Use `meanConditionScore` instead.
+"
+"2","`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+"
