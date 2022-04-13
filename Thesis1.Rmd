@@ -51,6 +51,11 @@ DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,
 
 
 ```{r}
+
+ggplot(JeriOriginalDataBase, aes(x=JeriOriginalDataBase$meanConditionScore)) + geom_histogram(bins = 6, position = position_dodge(0.7))
+```
+
+```{r}
 View(DataNoManagment)
 dim(DataNoManagment)
 ```
