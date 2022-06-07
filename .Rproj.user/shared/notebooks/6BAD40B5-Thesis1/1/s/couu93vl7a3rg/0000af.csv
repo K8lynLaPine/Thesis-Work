@@ -1,0 +1,13 @@
+"0","print(meanscore)"
+"2","Warning:"
+"2"," Use of `meandf$meanscore` is discouraged. Use `meanscore` instead.
+"
+"2","Warning:"
+"2"," Use of `meandf$Freq` is discouraged. Use `Freq` instead.
+"
+"2","Warning:"
+"2"," Use of `meandf$meanscore` is discouraged. Use `meanscore` instead.
+"
+"2","Warning:"
+"2"," Use of `meandf$Freq` is discouraged. Use `Freq` instead.
+"
