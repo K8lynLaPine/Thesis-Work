@@ -81,15 +81,15 @@ dim(DataNoManagment)
 
 ```{r}
 
-NaturalResourceScoreforALL <- ggplot(DataNoManagment, aes(x=DataNoManagment$meanConditionScore)) + geom_histogram(col = "lightblue") + stat_bin(binwidth=1) + ylim(c(0, 200)) + xlim(c(0,6)) +stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlab("Natural Resource Condition Score") + ylab("Number of Springs")
+#NaturalResourceScoreforALL <- ggplot(DataNoManagment, aes(x=DataNoManagment$meanConditionScore)) + geom_histogram(col = "lightblue") + stat_bin(binwidth=1) + ylim(c(0, 200)) + xlim(c(0,6)) +stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlab("Natural Resource Condition Score") + ylab("Number of Springs")
 
-pdf("NaturalResourceScoreforALL.pdf")
+#pdf("NaturalResourceScoreforALL.pdf")
 
-NaturalResourceScoreforALL
+#NaturalResourceScoreforALL
 
-dev.off()
+#dev.off()
 
-print(NaturalResourceScoreforALL)
+#print(NaturalResourceScoreforALL)
 
 
 #ggplot(HighPriotity, aes(x=HighPriotity$meanConditionScore)) + geom_histogram() +  stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
@@ -98,8 +98,14 @@ print(NaturalResourceScoreforALL)
 #ggplot(DataManagment, aes(x=DataManagment$HAB_quality)) + geom_histogram() + stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
 
 
-#scatter <- ggplot(JeriOriginalDataBase , aes(x= JeriOriginalDataBase$meanConditionScore, y=JeriOriginalDataBase$FHI_humanImpactRiskScore)) + geom_point() + xlab("Natural Resource Condition Score") + xlim(0,6) + ylab("Human Impacts Risk Score") + ylim(0,6)
-#print(scatter)
+scatter <- ggplot(DataNoManagment , aes(x=meanConditionScore, y=FHI_humanImpactRiskScore)) + geom_point() + xlab("Natural Resource Condition Score") + xlim(0,6) + ylab("Human Impacts Risk Score") + ylim(0,6)
+
+
+pdf("scatter.pdf")
+
+scatter
+
+dev.off()
 
 
 ```
