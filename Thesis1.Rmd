@@ -50,23 +50,23 @@ DataNoManagment <- select(JeriOriginalDataBase, siteid:seapscore_id,HAB_quality,
 
 
 
-meanscore <- round(DataNoManagment$meanConditionScore, digits=0)
+#meanscore <- round(DataNoManagment$meanConditionScore, digits=0)
 
-meandf <- as.data.frame(table(meanscore))
+#meandf <- as.data.frame(table(meanscore))
 
 
-view(meandf)
+#view(meandf)
 
 #meanscore1 <- ggplot(meandf, aes(x=meandf$meanscore, y= meandf$Freq)) + geom_bar(stat = "identity")+ geom_text(aes(label = Freq), vjust = -0.4) + xlab("Natural Resource Condition Score") + ylab("Number of Springs")
 #pdf("meanscore1.pdf")
 #meanscore1 
 #dev.off()
 
-meanscore <- ggplot(meandf, aes(x=meandf$meanscore, y= meandf$Freq)) + geom_bar(stat = "identity")+ geom_text(aes(label = Freq), vjust = -0.4) + xlab("Natural Resource Condition Score") + ylab("Number of Springs")
+#meanscore <- ggplot(meandf, aes(x=meandf$meanscore, y= meandf$Freq)) + geom_bar(stat = "identity")+ geom_text(aes(label = Freq), vjust = -0.4) + xlab("Natural Resource Condition Score") + ylab("Number of Springs")
 
-meanscore
+#meanscore
 
-print(meanscore)
+#print(meanscore)
 
 #ggplot(meandf, aes(x=meanscore))+ geom_bar(col = "lightblue") + stat_bin(binwidth=1) + ylim(c(0, 200)) + xlim(c(0,6)) +stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlab("Natural Resource Condition Score") + ylab("Number of Springs") + scale_x_continuous(breaks = 0:6)
 
@@ -81,15 +81,15 @@ dim(DataNoManagment)
 
 ```{r}
 
-#NaturalResourceScoreforALL <- ggplot(DataNoManagment, aes(x=DataNoManagment$meanConditionScore)) + geom_histogram(col = "lightblue") + stat_bin(binwidth=1) + ylim(c(0, 200)) + xlim(c(0,6)) +stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlab("Natural Resource Condition Score") + ylab("Number of Springs")
+NaturalResourceScoreforALL <- ggplot(DataNoManagment, aes(x=DataNoManagment$meanConditionScore)) + geom_histogram(col = "lightblue") + stat_bin(binwidth=1) + ylim(c(0, 200)) + xlim(c(0,6)) +stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlab("Natural Resource Condition Score") + ylab("Number of Springs")
 
-#pdf("NaturalResourceScoreforALL.pdf")
+pdf("NaturalResourceScoreforALL.pdf")
 
-#NaturalResourceScoreforALL
+NaturalResourceScoreforALL
 
-#dev.off()
+dev.off()
 
-#print(NaturalResourceScoreforALL)
+print(NaturalResourceScoreforALL)
 
 
 #ggplot(HighPriotity, aes(x=HighPriotity$meanConditionScore)) + geom_histogram() +  stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
@@ -118,68 +118,68 @@ dev.off()
 BiodiversityHabitatHP <- select(HighPriotity, siteid:seapscore_id,HAB_quality,FHI_humanImpactRiskScore,meanConditionScore)
 
 ggplot(BiodiversityHabitatHP, aes(x=BiodiversityHabitatHP$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + xlim(c(0,6)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) 
+
 
 BiodiversityHabitatALL <- select(DataNoManagment, siteid:seapscore_id,HAB_quality,FHI_humanImpactRiskScore,meanConditionScore) 
 
 ggplot(BiodiversityHabitatALL, aes(x=BiodiversityHabitatALL$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + xlim(c(0,6)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5)
 
 
 
 FencingHP <- select(HighPriotity, siteid:seapscore_id,FHI_fencing,FHI_humanImpactRiskScore,meanConditionScore) 
 
 ggplot(FencingHP, aes(x=FencingHP$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlim(c(0,6)) 
 
 FencingALL <- select(DataNoManagment, siteid:seapscore_id,FHI_fencing,FHI_humanImpactRiskScore,meanConditionScore) 
 
 ggplot(FencingALL, aes(x=FencingALL$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
-
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlim(c(0,6)) 
 
 RecreationHP <- select(HighPriotity, siteid:seapscore_id,FHI_recreation,FHI_humanImpactRiskScore,meanConditionScore)
 
 ggplot(RecreationHP, aes(x=RecreationHP$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) +xlim(c(0,6)) 
 
 RecreationALL <- select(DataNoManagment, siteid:seapscore_id,FHI_recreation,FHI_humanImpactRiskScore,meanConditionScore)
 
 ggplot(RecreationALL, aes(x=RecreationALL$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlim(c(0,6)) 
 
 
 CulturalHP <- select(HighPriotity, siteid:seapscore_id,AC_culturalSignificance ,FHI_humanImpactRiskScore,meanConditionScore)
 
 ggplot(CulturalHP, aes(x=CulturalHP$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlim(c(0,6)) 
 
 
 CulturalALL <- select(DataNoManagment, siteid:seapscore_id,AC_culturalSignificance ,FHI_humanImpactRiskScore,meanConditionScore)
 
 ggplot(CulturalALL, aes(x=CulturalALL$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlim(c(0,6)) 
 
 
 MunicipalHP <-select(HighPriotity, siteid:seapscore_id,FHI_flowRegulation,FHI_humanImpactRiskScore,meanConditionScore) 
 
 ggplot(MunicipalHP, aes(x=MunicipalHP$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlim(c(0,6)) 
 
 MunicipalALL <-select(DataNoManagment, siteid:seapscore_id,FHI_flowRegulation,FHI_humanImpactRiskScore,meanConditionScore) 
 
 ggplot(MunicipalALL, aes(x=MunicipalALL$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlim(c(0,6)) 
 
 FlowHP <- select(HighPriotity, siteid:seapscore_id,AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore) 
 
 ggplot(FlowHP, aes(x=FlowHP$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) +xlim(c(0,6)) 
 
 FlowALL <- select(DataNoManagment, siteid:seapscore_id,AQ_persistence,FHI_humanImpactRiskScore,meanConditionScore) 
 
 ggplot(FlowALL, aes(x=FlowALL$meanConditionScore)) + geom_histogram() + 
-    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + scale_x_continuous(breaks=0:6)
+    stat_bin(binwidth=1) + ylim(c(0, 200)) + stat_bin(binwidth=1, geom="text", aes(label=..count..), vjust=-1.5) + xlim(c(0,6)) 
 
 
                          
@@ -205,7 +205,6 @@ write.csv(FlowALL, "FlowALL.csv")
 
 
 ```{r}
-view(BiodiversityHabitatALL)
 
 ```
 
